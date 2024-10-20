@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"time"
 
-	"exemplo.com/crud/internal/models"
+	"crud/internal/models"
 )
 
 func GetAllProducts(db *sql.DB) ([]models.Product, error) {
@@ -28,6 +28,25 @@ func GetAllProducts(db *sql.DB) ([]models.Product, error) {
 		products = append(products, product)
 	}
 	return products, nil
+}
+
+func GetProductByDescription(db *sql.DB, description string) (models.Product, error) {
+	var product models.Product
+	var deletedAt sql.NullTime
+
+	query := "SELECT id, description, product_type, created_at, updated_at, deleted_at FROM products WHERE description = ? AND deleted_at IS NULL"
+	err := db.QueryRow(query, description).Scan(&product.ID, &product.Description, &product.ProductType, &product.CreatedAt, &product.UpdatedAt, &deletedAt)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return product, nil // Retorna produto vazio se não for encontrado
+		}
+		return product, err
+	}
+
+	if deletedAt.Valid {
+		product.DeletedAt = &deletedAt.Time
+	}
+	return product, nil
 }
 
 func CreateProduct(db *sql.DB, product models.Product) error {

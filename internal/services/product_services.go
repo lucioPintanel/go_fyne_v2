@@ -1,13 +1,17 @@
 package services
 
 import (
-	"exemplo.com/crud/internal/database"
-	"exemplo.com/crud/internal/models"
-	"exemplo.com/crud/internal/repository"
+	"crud/internal/database"
+	"crud/internal/models"
+	"crud/internal/repository"
 )
 
 func GetAllProducts() ([]models.Product, error) {
 	return repository.GetAllProducts(database.DB)
+}
+
+func GetProductByDescription(description string) (models.Product, error) {
+	return repository.GetProductByDescription(database.DB, description)
 }
 
 func CreateProduct(product models.Product) error {

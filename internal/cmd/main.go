@@ -1,8 +1,9 @@
 package main
 
 import (
-	"exemplo.com/crud/internal/database"
-	"exemplo.com/crud/internal/ui"
+	"crud/internal/database"
+	"crud/internal/ui"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 )
@@ -13,7 +14,8 @@ func main() {
 
 	database.InitDB()
 
-	ui.SetupUI(w)
+	lui := ui.NewProductUI()
+	lui.SetupUI(w)
 
 	w.Resize(fyne.NewSize(400, 400))
 	w.ShowAndRun()
