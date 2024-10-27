@@ -42,20 +42,20 @@ Aqui estão algumas issues abertas no projeto:
 ### [#1 Implementar Funcionalidade de Exclusão de Registro](https://github.com/lucioPintanel/go_fyne_v2/issues/1#issue-2616186065)
 - **Descrição**: Adicionar a funcionalidade de deletar registros diretamente pelo aplicativo.
 - **Objetivos**:
-    1. Selecionar registro na lista.
-    2. Apagar registro da base de dados via ID.
-    3. Atualizar lista na tela.
+1. Selecionar registro na lista.
+2. Apagar registro da base de dados via ID.
+3. Atualizar lista na tela.
 
 ### [#3 Teste Unitário para Funções do 'Repository'](https://github.com/lucioPintanel/go_fyne_v2/issues/3#issue-2616197499)
 - **Descrição**: Criação de testes unitários para as funções do repositório.
 - **Objetivos**:
-    1. Testar função de criação de registros.
-    2. Testar função de leitura de registros.
-    3. Testar função de atualização de registros.
-    4. Testar função de exclusão de registros.
+1. Testar função de criação de registros.
+2. Testar função de leitura de registros.
+3. Testar função de atualização de registros.
+4. Testar função de exclusão de registros.
 
 ### [#4 Teste Unitário para Funções do 'Services'](https://github.com/lucioPintanel/go_fyne_v2/issues/4#issue-2616198373)
 - **Descrição**: Criação de testes unitários para as funções do serviço.
 - **Objetivos**:
-    1. Testar lógica de negócios.
-    2. Validar comportamento de serviços.
+1. Testar lógica de negócios.
+2. Validar comportamento de serviços.
