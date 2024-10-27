@@ -9,7 +9,7 @@
 
 ## Visão Geral
 
-CRUD Fyne V2 é um projeto que demonstra a implementação de operações CRUD (Criar, Ler, Atualizar e Excluir) utilizando o framework [Fyne](https://fyne.io/) para Go. Este projeto é ideal para quem busca criar interfaces gráficas de usuário (GUIs) elegantes e eficientes em Go.
+CRUD Fyne V2 é um projeto que demonstra a implementação de operações CRUD (Criar, Ler, Atualizar e Excluir) utilizando o framework [Fyne](https://fyne.io/) para [Go](https://go.dev/). Este projeto é ideal para quem busca criar interfaces gráficas de usuário (GUIs) elegantes e eficientes em Go.
 
 ## Funcionalidades
 
