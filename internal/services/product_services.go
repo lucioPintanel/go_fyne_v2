@@ -4,6 +4,7 @@ import (
 	"crud/internal/database"
 	"crud/internal/models"
 	"crud/internal/repository"
+	"database/sql"
 )
 
 func GetAllProducts() ([]models.Product, error) {
@@ -22,6 +23,6 @@ func UpdateProduct(product models.Product) error {
 	return repository.UpdateProduct(database.DB, product)
 }
 
-func DeleteProduct(id int) error {
+func DeleteProduct(id int) (sql.Result, error) {
 	return repository.DeleteProduct(database.DB, id)
 }
