@@ -59,7 +59,10 @@ func UpdateProduct(db *sql.DB, product models.Product) error {
 	return err
 }
 
-func DeleteProduct(db *sql.DB, id int) error {
-	_, err := db.Exec("UPDATE products SET deleted_at = ? WHERE id = ?", time.Now(), id)
-	return err
+func DeleteProduct(db *sql.DB, id int) (sql.Result, error) {
+	result, err := db.Exec("UPDATE products SET deleted_at = ? WHERE id = ?", time.Now(), id)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
