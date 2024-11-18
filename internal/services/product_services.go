@@ -12,6 +12,7 @@ func GetAllProducts() ([]models.Product, error) {
 }
 
 func GetProductByDescription(description string) (models.Product, error) {
+	//Busca pela descrição do produto
 	return repository.GetProductByDescription(database.DB, description)
 }
 
