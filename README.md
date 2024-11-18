@@ -39,13 +39,6 @@ Para contribuir, por favor, siga os passos abaixo:
 ## Issues
 Aqui estão algumas issues abertas no projeto:
 
-### [#1 Implementar Funcionalidade de Exclusão de Registro](https://github.com/lucioPintanel/go_fyne_v2/issues/1#issue-2616186065)
-- **Descrição**: Adicionar a funcionalidade de deletar registros diretamente pelo aplicativo.
-- **Objetivos**:
-1. Selecionar registro na lista.
-2. Apagar registro da base de dados via ID.
-3. Atualizar lista na tela.
-
 ### [#3 Teste Unitário para Funções do 'Repository'](https://github.com/lucioPintanel/go_fyne_v2/issues/3#issue-2616197499)
 - **Descrição**: Criação de testes unitários para as funções do repositório.
 - **Objetivos**:
