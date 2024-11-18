@@ -99,17 +99,38 @@ func (ui *ProductUI) showEditForm(id widget.ListItemID) {
 		formWindow.Close()
 		ui.loadProductsFromDB()
 	})
-	formWindow.SetContent(container.NewVBox(form, saveButton))
+	delButton := widget.NewButton("Delete", func() {
+		services.DeleteProduct(product.ID)
+		err := removeItemFromStringList(ui.ProductListBinding, id)
+		if err != nil {
+			return
+		}
+		//ui.ProductListBinding.Set()
+		formWindow.Close()
+		ui.loadProductsFromDB()
+	})
+	formWindow.SetContent(container.NewVBox(form, container.NewVBox(saveButton, delButton)))
 	formWindow.Resize(fyne.NewSize(300, 150))
 	formWindow.Show()
 }
 
 func getProductFromDB(description string) models.Product {
-	// Implement your logic to retrieve the product from the database
-	// For example:
 	product, err := services.GetProductByDescription(description)
 	if err != nil {
 		return models.Product{}
 	}
 	return product
+}
+
+func removeItemFromStringList(list binding.StringList, index int) error {
+	items, err := list.Get()
+	if err != nil {
+		return err
+	}
+
+	// Remover o item do slice
+	items = append(items[:index], items[index+1:]...)
+
+	// Atualizar o binding com o novo slice
+	return list.Set(items)
 }
