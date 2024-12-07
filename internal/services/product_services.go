@@ -7,23 +7,24 @@ import (
 	"database/sql"
 )
 
+var Repo repository.Repository = repository.Repo
+
 func GetAllProducts() ([]models.Product, error) {
-	return repository.GetAllProducts(database.DB)
+	return Repo.GetAllProducts(database.DB)
 }
 
 func GetProductByDescription(description string) (models.Product, error) {
-	//Busca pela descrição do produto
-	return repository.GetProductByDescription(database.DB, description)
+	return Repo.GetProductByDescription(database.DB, description)
 }
 
 func CreateProduct(product models.Product) error {
-	return repository.CreateProduct(database.DB, product)
+	return Repo.CreateProduct(database.DB, product)
 }
 
 func UpdateProduct(product models.Product) error {
-	return repository.UpdateProduct(database.DB, product)
+	return Repo.UpdateProduct(database.DB, product)
 }
 
 func DeleteProduct(id int) (sql.Result, error) {
-	return repository.DeleteProduct(database.DB, id)
+	return Repo.DeleteProduct(database.DB, id)
 }

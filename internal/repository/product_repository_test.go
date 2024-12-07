@@ -15,7 +15,6 @@ func TestGetAllProducts(t *testing.T) {
 	assert.NoError(t, err)
 	defer db.Close()
 
-	// Mock rows to return
 	rows := sqlmock.NewRows([]string{"id", "description", "product_type", "created_at", "updated_at", "deleted_at"}).
 		AddRow(1, "Product 1", "Type 1", time.Now(), time.Now(), nil).
 		AddRow(2, "Product 2", "Type 2", time.Now(), time.Now(), nil)
@@ -23,7 +22,8 @@ func TestGetAllProducts(t *testing.T) {
 	mock.ExpectQuery("SELECT id, description, product_type, created_at, updated_at, deleted_at FROM products WHERE deleted_at IS NULL").
 		WillReturnRows(rows)
 
-	products, err := GetAllProducts(db)
+	repo := repositoryImpl{}
+	products, err := repo.GetAllProducts(db)
 	assert.NoError(t, err)
 	assert.Len(t, products, 2)
 }
@@ -33,7 +33,6 @@ func TestGetProductByDescription(t *testing.T) {
 	assert.NoError(t, err)
 	defer db.Close()
 
-	// Mock row to return
 	row := sqlmock.NewRows([]string{"id", "description", "product_type", "created_at", "updated_at", "deleted_at"}).
 		AddRow(1, "Product 1", "Type 1", time.Now(), time.Now(), nil)
 
@@ -41,7 +40,8 @@ func TestGetProductByDescription(t *testing.T) {
 		WithArgs("Product 1").
 		WillReturnRows(row)
 
-	product, err := GetProductByDescription(db, "Product 1")
+	repo := repositoryImpl{}
+	product, err := repo.GetProductByDescription(db, "Product 1")
 	assert.NoError(t, err)
 	assert.Equal(t, "Product 1", product.Description)
 	assert.Equal(t, "Type 1", product.ProductType)
@@ -61,7 +61,8 @@ func TestCreateProduct(t *testing.T) {
 		WithArgs(product.Description, product.ProductType).
 		WillReturnResult(sqlmock.NewResult(1, 1))
 
-	err = CreateProduct(db, product)
+	repo := repositoryImpl{}
+	err = repo.CreateProduct(db, product)
 	assert.NoError(t, err)
 }
 
@@ -80,7 +81,8 @@ func TestUpdateProduct(t *testing.T) {
 		WithArgs(product.Description, product.ProductType, sqlmock.AnyArg(), product.ID).
 		WillReturnResult(sqlmock.NewResult(1, 1))
 
-	err = UpdateProduct(db, product)
+	repo := repositoryImpl{}
+	err = repo.UpdateProduct(db, product)
 	assert.NoError(t, err)
 }
 
@@ -95,7 +97,8 @@ func TestDeleteProduct(t *testing.T) {
 		WithArgs(sqlmock.AnyArg(), id).
 		WillReturnResult(sqlmock.NewResult(1, 1))
 
-	result, err := DeleteProduct(db, id)
+	repo := repositoryImpl{}
+	result, err := repo.DeleteProduct(db, id)
 	assert.NoError(t, err)
 
 	rowsAffected, err := result.RowsAffected()
