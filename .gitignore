@@ -426,3 +426,4 @@ FodyWeavers.xsd
 *.db
 *.odt
 report.xml
+diffFile.txt
