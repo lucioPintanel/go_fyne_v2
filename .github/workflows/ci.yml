@@ -36,5 +36,11 @@ jobs:
     - name: Install dependencies
       run: go mod tidy
 
+    - name: Create git patch
+      run: git diff HEAD~1 HEAD > patch.diff # Cria o arquivo de patch
+      
+    - name: Run golangci-lint
+      run: golangci-lint run -c .golangci.yml --new-from-patch patch.diff # Usa o arquivo de patch criado
+
     - name: Run tests
       run: go test -v ./...
