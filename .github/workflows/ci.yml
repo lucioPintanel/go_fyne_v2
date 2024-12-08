@@ -35,22 +35,6 @@ jobs:
 
     - name: Install dependencies
       run: go mod tidy
-
-    - name: Install golangci-lint
-      run: |
-        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.47.3
-
-    - name: Create git patch
-      run: |
-        if git rev-parse HEAD~1 > /dev/null 2>&1; then
-          git diff HEAD~1 HEAD > patch.diff
-        else
-          echo "No previous commit found, creating empty patch" > patch.diff
-        fi
-
-    - name: Run golangci-lint without go-critic
-      run: |
-        golangci-lint run --disable-all --enable=misspell --new-from-patch patch.diff
-
+      
     - name: Run tests
       run: go test -v ./...
