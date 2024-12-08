@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: 
+      - '**'  # Executa em qualquer branch
+  pull_request:
+    branches: 
+      - '**'  # Executa em qualquer branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.23
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          libx11-dev \
+          libxcursor-dev \
+          libxrandr-dev \
+          libxinerama-dev \
+          libxi-dev \
+          libgl1-mesa-dev \
+          xorg-dev
+
+    - name: Install dependencies
+      run: go mod tidy
+
+    - name: Run tests
+      run: go test -v ./...
