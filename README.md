@@ -36,19 +36,3 @@ Para contribuir, por favor, siga os passos abaixo:
 4. Envie suas mudanças para a branch original (`git push origin minha-branch`)
 5. Crie uma Pull Request
 
-## Issues
-Aqui estão algumas issues abertas no projeto:
-
-### [#3 Teste Unitário para Funções do 'Repository'](https://github.com/lucioPintanel/go_fyne_v2/issues/3#issue-2616197499)
-- **Descrição**: Criação de testes unitários para as funções do repositório.
-- **Objetivos**:
-1. Testar função de criação de registros.
-2. Testar função de leitura de registros.
-3. Testar função de atualização de registros.
-4. Testar função de exclusão de registros.
-
-### [#4 Teste Unitário para Funções do 'Services'](https://github.com/lucioPintanel/go_fyne_v2/issues/4#issue-2616198373)
-- **Descrição**: Criação de testes unitários para as funções do serviço.
-- **Objetivos**:
-1. Testar lógica de negócios.
-2. Validar comportamento de serviços.
