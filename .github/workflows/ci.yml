@@ -35,6 +35,11 @@ jobs:
 
     - name: Install dependencies
       run: go mod tidy
+
+    - name: Set GOROOT
+      run: |
+        export GOROOT=$(go env GOROOT)
+        echo "GOROOT set to $GOROOT"
     
     - name: Install golangci-lint 
       run: | 
