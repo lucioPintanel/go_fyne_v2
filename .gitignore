@@ -425,3 +425,4 @@ FodyWeavers.xsd
 *.sln.iml
 *.db
 *.odt
+report.xml
