@@ -50,5 +50,4 @@ jobs:
 
     - name: Run golangci-lint
       run: |
-        ls -la  # Listar arquivos para verificar a presença do .golangci.yml
-        golangci-lint run -c .golangci.yml --new-from-patch patch.diff
+        golangci-lint run -c ./.golangci.yml
