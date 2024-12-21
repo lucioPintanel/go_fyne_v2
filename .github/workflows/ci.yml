@@ -50,5 +50,5 @@ jobs:
 
     - name: Run golangci-lint
       run: |
-        go get ./...
+        #go get ./...
         golangci-lint run -c .golangci.yml --new-from-patch patch.diff
