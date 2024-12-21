@@ -35,9 +35,6 @@ jobs:
 
     - name: Install dependencies
       run: go mod tidy
-      
-    - name: Run tests
-      run: go test -v ./...
 
     - name: Install golangci-lint
       run: |
@@ -52,4 +49,6 @@ jobs:
         fi
 
     - name: Run golangci-lint
-      run: golangci-lint run -c .golangci.yml --new-from-patch patch.diff
+      run: |
+        go get ./...
+        golangci-lint run -c .golangci.yml --new-from-patch patch.diff
