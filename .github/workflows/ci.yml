@@ -38,7 +38,7 @@ jobs:
 
     - name: Install golangci-lint
       run: |
-        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.47.3
+        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.62.2
 
     - name: Create git patch
       run: |
@@ -51,4 +51,4 @@ jobs:
     - name: Run golangci-lint
       run: |
         #go get ./...
-        golangci-lint run -c .golangci.yml --new-from-patch patch.diff
+        golangci-lint run -c .golangci.yml #--new-from-patch patch.diff
