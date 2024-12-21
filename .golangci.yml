@@ -61,6 +61,7 @@ linters:
   #enable-all: true
   disable:
     - copyloopvar
+    - importas
   
   # Enable presets.
   # https://golangci-lint.run/usage/linters
