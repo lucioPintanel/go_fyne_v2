@@ -38,7 +38,7 @@ jobs:
 
     - name: Install golangci-lint
       run: |
-        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.62.2
+        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.47.3
 
     - name: Create git patch
       run: |
@@ -50,5 +50,5 @@ jobs:
 
     - name: Run golangci-lint
       run: |
-        go get ./...
-        golangci-lint run -c .golangci.yml #--new-from-patch patch.diff
+        ls -la  # Listar arquivos para verificar a presença do .golangci.yml
+        golangci-lint run -c .golangci.yml --new-from-patch patch.diff
