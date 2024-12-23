@@ -23,4 +23,4 @@ jobs:
     # - name: Install golangci-lint (specific version)
     #   run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.49.1
     - name: Run golangci-lint
-      run: golangci-lint run
+      run: golangci-lint run -c ./.golangci.yml
