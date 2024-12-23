@@ -41,7 +41,7 @@ jobs:
         curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.47.3
 
     - name: Set GOROOT
-      run: export GOROOT=$(go env GOROOT)
+      run: export GOROOT=/opt/hostedtoolcache/go/1.23.4/x64
 
     - name: Create git patch
       run: |
