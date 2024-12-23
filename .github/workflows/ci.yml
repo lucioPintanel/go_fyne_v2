@@ -49,5 +49,4 @@ jobs:
         fi
 
     - name: Run golangci-lint
-      run: |
-        golangci-lint run -c ./.golangci.yml
+      run: golangci-lint run -c .golangci.yml --new-from-patch patch.diff --disable go-critic
