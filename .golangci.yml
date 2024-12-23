@@ -59,10 +59,6 @@ linters:
   # Enable all available linters.
   # Default: false
   enable-all: false
-  disable:
-    - copyloopvar
-    - importas
-    - go-critic
   
   # Enable presets.
   # https://golangci-lint.run/usage/linters
