@@ -15,7 +15,12 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: '1.23'
-    - name: Install golangci-lint
-      run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.49.1
+    - name: Download dependencies (optional)
+      run: go mod download
+    - name: Install golangci-lint (latest)
+      run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+    # Uncomment the following line if you want to install a specific version
+    # - name: Install golangci-lint (specific version)
+    #   run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.49.1
     - name: Run golangci-lint
       run: golangci-lint run
