@@ -58,7 +58,6 @@ linters:
     - zerologlint
   # Enable all available linters.
   # Default: false
-  enable-all: false
   
   # Enable presets.
   # https://golangci-lint.run/usage/linters
