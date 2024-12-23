@@ -40,6 +40,9 @@ jobs:
       run: |
         curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.47.3
 
+    - name: Set GOROOT
+      run: export GOROOT=$(go env GOROOT)
+
     - name: Create git patch
       run: |
         if git rev-parse HEAD~1 > /dev/null 2>&1; then
