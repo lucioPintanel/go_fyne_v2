@@ -48,7 +48,7 @@ jobs:
       run: go test -v ./...
     
     - name: Build
-      run: go build -o myapp .
+      run: go build -o myapp ./internal/cmd/main.go
     
     - name: Create GitHub Release
       id: create_release
