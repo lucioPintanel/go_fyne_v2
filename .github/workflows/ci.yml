@@ -1,26 +1,37 @@
-name: CI
+name: Go Testing and Deployment
 
 on:
   push:
-    branches: 
-      - '**'  # Executa em qualquer branch
+    tags: 
+      - 'v*.*.*'  # Executa em pushs de tags de versão, como v1.0.0
   pull_request:
-    branches: 
-      - '**'  # Executa em qualquer branch
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
+    - uses: actions/checkout@v3
+    
     - name: Set up Go
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@v4
       with:
-        go-version: 1.23
-
+        go-version: '1.23'
+        
+    - name: Cache Go modules
+      uses: actions/cache@v3
+      with:
+        path: ~/go/pkg
+        key: ${{ runner.os }}-go-${{ hashFiles('go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
+          
+    - name: Get dependencies
+      run: go mod tidy
+    
+    - name: Verify Go version
+      run: go version
+      
     - name: Install system dependencies
       run: |
         sudo apt-get update
@@ -32,9 +43,10 @@ jobs:
           libxi-dev \
           libgl1-mesa-dev \
           xorg-dev
-
-    - name: Install dependencies
-      run: go mod tidy
-
+    
     - name: Run tests
       run: go test -v ./...
+    
+    - name: Build
+      run: go build -o myapp ./internal/cmd/main.go
+    
