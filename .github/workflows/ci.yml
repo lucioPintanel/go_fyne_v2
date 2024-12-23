@@ -1,10 +1,11 @@
-name: Go Linting and Building
+name: Go Testing and Deployment
 
 on:
   push:
-    branches: [ '**' ]
+    tags: 
+      - 'v*.*.*'  # Executa em pushs de tags de versão, como v1.0.0
   pull_request:
-    branches: [ '**' ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -43,23 +44,29 @@ jobs:
           libgl1-mesa-dev \
           xorg-dev
     
-    - name: Install golangci-lint
-      run: |
-        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.47.3
-
-    - name: Set GOROOT
-      run: export GOROOT=$(go env GOROOT)
-    
-    - name: Create git patch
-      run: |
-        if git rev-parse HEAD~1 > /dev/null 2>&1; then
-          git diff HEAD~1 HEAD > patch.diff
-        else
-          echo "No previous commit found, creating empty patch" > patch.diff
-        fi
-
-    - name: Run golangci-lint
-      run: golangci-lint run -c .golangci.yml --new-from-patch patch.diff
+    - name: Run tests
+      run: go test -v ./...
     
     - name: Build
       run: go build -o myapp .
+    
+    - name: Create GitHub Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+    
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./myapp
+        asset_name: myapp
+        asset_content_type: application/octet-stream
